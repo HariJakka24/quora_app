@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h2>All Questions</h2>
+{% for question in questions %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ question.title }}</h5>
+            <p class="card-text">{{ question.body|truncatechars:150 }}</p>
+            <a href="{% url 'question_detail' question.pk %}" class="btn btn-sm btn-primary">View</a>
+            <small class="text-muted float-end">Posted by {{ question.user.username }} on {{ question.created_at|date:"M d, Y H:i" }}</small>
+        </div>
+    </div>
+{% empty %}
+    <p>No questions posted yet.</p>
+{% endfor %}
+{% endblock %}
