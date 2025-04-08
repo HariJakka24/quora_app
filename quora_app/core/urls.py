@@ -9,4 +9,5 @@ urlpatterns = [
     path('ask/', views.post_question, name='post_question'),
     path('question/<int:pk>/', views.question_detail, name='question_detail'),
     path('like/<int:answer_id>/', views.like_answer, name='like_answer'),
+    path('error/', views.error_page, name='error_page'),
 ]
