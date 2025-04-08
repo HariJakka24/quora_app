@@ -4,18 +4,18 @@ from django.contrib.auth.models import User
 
 class ActiveManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(is_deleted=True)
+        return super().get_queryset().filter(is_deleted=False)
 
 class TimeStampedModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
-    is_deleted = models.BooleanField(default=True)
+    is_deleted = models.BooleanField(default=False)
 
     objects = ActiveManager()
     all_objects = models.Manager()
 
     def delete(self, using=None, keep_parents=False):
-        self.is_deleted = False
+        self.is_deleted = True
         self.save()
 
     class Meta:
